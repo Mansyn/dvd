@@ -1,0 +1,12 @@
+<div class="container mx-auto">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Actions Buttons</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [activeDayIsOpen]="true"
+                [refresh]="refresh" (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-month-view>
+        </mat-card-content>
+    </mat-card>
+</div>

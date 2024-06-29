@@ -1,0 +1,51 @@
+<mat-divider></mat-divider>
+<div class="container mx-auto">
+  <div class="mx-auto py-16">
+    <h1 class="text-4xl font-bold text-center mb-12">The DVD Admin Page</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div>
+        <button mat-raised-button color="primary" (click)="openDialog()">Add Event</button>
+      </div>
+      <table mat-table [dataSource]="events" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef> Start Time </th>
+          <td mat-cell *matCellDef="let event"> {{event.start | stringToDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef> Stop Time </th>
+          <td mat-cell *matCellDef="let event"> {{event.end | stringToDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="allDay">
+          <th mat-header-cell *matHeaderCellDef> Is All Day </th>
+          <td mat-cell *matCellDef="let event"> {{event.allDay}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let event">
+            <button mat-button (click)="editEvent(event)">Edit</button>
+            <button mat-button color="warn" (click)="deleteEvent(event.id)">Delete</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+  </div>
+</div>
+<mat-divider></mat-divider>

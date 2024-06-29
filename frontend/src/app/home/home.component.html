@@ -1,0 +1,81 @@
+<div class="bg">
+    <mat-divider></mat-divider>
+    <div class="container mx-auto">
+        <div class="mx-auto max-w-2xl py-16 sm:py-32">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Welcome to DVD Brew</h1>
+                <p class="mt-6 text-lg leading-8 text-gray-600">30 draft lines, a friendly staff, and full calendar of
+                    events.</p>
+                <div class="mt-10 flex items-center justify-center gap-x-6">
+                    <a mat-fab extended color="accent" href="#calendar"><mat-icon>calendar_today</mat-icon>Calendar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <carousel [animationType]="animationTypes[1].value" [images]="slides_x"></carousel>
+    <mat-divider></mat-divider>
+    <div class="container mx-auto">
+        <div class="mx-auto py-8 sm:py-16">
+            <div class="max-w-md mx-auto md:max-w-2xl m-3">
+                <div class="md:flex">
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Our Restaurant</h1>
+                </div>
+            </div>
+            <div class="max-w-md mx-auto md:max-w-2xl m-3">
+                <mat-card class="my-4">
+                    <mat-card-header>
+                        <mat-card-title>Hours of Operation</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <ul class="mt-2">
+                            <li>
+                                <span>Monday</span>
+                                <span>11:00 AM - 10:00 PM</span>
+                            </li>
+                            <li>
+                                <span>Tuesday</span>
+                                <span>11:00 AM - 10:00 PM</span>
+                            </li>
+                            <li>
+                                <span>Wednesday</span>
+                                <span>11:00 AM - 10:00 PM</span>
+                            </li>
+                            <li>
+                                <span>Thursday</span>
+                                <span>11:00 AM - 10:00 PM</span>
+                            </li>
+                            <li>
+                                <span>Friday</span>
+                                <span>11:00 AM - 11:00 PM</span>
+                            </li>
+                            <li>
+                                <span>Saturday</span>
+                                <span>12:00 PM - 11:00 PM</span>
+                            </li>
+                            <li>
+                                <span>Sunday</span>
+                                <span>12:00 PM - 9:00 PM</span>
+                            </li>
+                        </ul>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="my-4">
+                    <mat-card-header>
+                        <mat-card-title>Location</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="mt-2">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3089.439275416262!2d-84.2833945236416!3d39.25559862548888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x884055b727cbb747%3A0x70e62e0dc8ec02b8!2sDVD%20Brew!5e0!3m2!1sen!2sus!4v1717096904891!5m2!1sen!2sus"
+                                width="100%" hstyle="border:0;" style="min-height: 450px;" allowfullscreen=""
+                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <carousel [animationType]="animationTypes[1].value" [images]="slides_y"></carousel>
+    <calendar-view></calendar-view>
+</div>

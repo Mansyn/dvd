@@ -1,0 +1,50 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <div class="mt-2">
+        @if (!isLoggedIn) {
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput name="username" [(ngModel)]="form.username" required #username="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && username.errors }" />
+          </mat-form-field>
+          @if (username.errors && f.submitted) {
+          <div class="invalid-feedback">Username is required!</div>
+          }
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" [(ngModel)]="form.password" required minlength="6"
+              #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
+          </mat-form-field>
+          @if (password.errors && f.submitted) {
+          <div class="invalid-feedback">
+            @if (password.errors['required']) {
+            <div>Password is required</div>
+            }
+            @if (password.errors['minlength']) {
+            <div>Password must be at least 6 characters</div>
+            }
+          </div>
+          }
+          <button mat-raised-button color="primary" type="submit">Login</button>
+          <div>
+            @if (f.submitted && isLoginFailed) {
+            <div class="alert alert-danger" role="alert">
+              Login failed: {{ errorMessage }}
+            </div>
+            }
+          </div>
+        </form>
+        } @else {
+        <div class="alert alert-success">Logged in as {{ user["username"] }}.</div>
+        @if (this.storageService.isAdmin()) {
+        <a mat-raised-button color="primary" href="admin">Admin</a>
+        }
+        <button mat-raised-button color="secondary" (click)="logout()">Logout</button>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

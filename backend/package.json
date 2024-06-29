@@ -1,0 +1,36 @@
+{
+  "name": "dvd-brew",
+  "version": "1.0.0",
+  "description": "DvD Brew server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mongo-start": "sudo mongod --dbpath ~/data/db"
+  },
+  "engines": {
+    "node": "20",
+    "npm": "6"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "jwt",
+    "login",
+    "registration",
+    "authentication",
+    "authorization",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "scuba steve",
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.11.2"
+  }
+}
