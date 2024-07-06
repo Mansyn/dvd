@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 8081",
-    "build": "ng build",
+    "build": "ng build -c production",
     "postbuild": "rm -rf ../backend/public/*; mv ./dist/dvd-app/browser/* ../backend/public/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
