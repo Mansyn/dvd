@@ -2,20 +2,18 @@
 <div class="container mx-auto">
   <div class="mx-auto py-16">
     <h1 class="text-4xl font-bold text-center mb-12">The DVD Admin Page</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div>
-        <button mat-raised-button color="primary" (click)="openDialog()">Add Event</button>
-      </div>
-      <table mat-table [dataSource]="events" class="mat-elevation-z8">
+    <div class="container mx-auto p-4 bg-white shadow rounded-lg">
+      <button mat-raised-button color="primary" class="mx-2" (click)="openDialog()">Add New Event</button>
+      <table mat-table [dataSource]="events" class="mat-elevation-z8 w-full mt-4">
 
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef> Title </th>
-          <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+          <td mat-cell *matCellDef="let event"> {{event.title | truncate: 20}} </td>
         </ng-container>
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef> Description </th>
-          <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+          <td mat-cell *matCellDef="let event"> {{event.description | truncate: 40}} </td>
         </ng-container>
 
         <ng-container matColumnDef="start">
@@ -25,27 +23,35 @@
 
         <ng-container matColumnDef="end">
           <th mat-header-cell *matHeaderCellDef> Stop Time </th>
-          <td mat-cell *matCellDef="let event"> {{event.end | stringToDate}} </td>
+          <td mat-cell *matCellDef="let event">
+          @if (!event.allDay) {
+             {{event.end | stringToDate}}
+          } </td>
         </ng-container>
 
         <ng-container matColumnDef="allDay">
           <th mat-header-cell *matHeaderCellDef> Is All Day </th>
-          <td mat-cell *matCellDef="let event"> {{event.allDay}} </td>
+          <td mat-cell *matCellDef="let event">
+            <mat-slide-toggle [checked]="event.allDay">
+            </mat-slide-toggle>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let event">
-            <button mat-button (click)="editEvent(event)">Edit</button>
-            <button mat-button color="warn" (click)="deleteEvent(event.id)">Delete</button>
+            <button mat-icon-button aria-label="edit event" (click)="editEvent(event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" aria-label="delete event" (click)="deleteEvent(event._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-
     </div>
   </div>
-</div>
-<mat-divider></mat-divider>
+  <mat-divider></mat-divider>

@@ -1,5 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
-  HOST: "0.0.0.0",
-  PORT: 27017,
-  DB: "dvd-app-2770"
+  URI: `mongodb+srv://${process.env.MONGO_CRED}@dvd-brew.78j48c9.mongodb.net/?appName=dvd-brew`
 };

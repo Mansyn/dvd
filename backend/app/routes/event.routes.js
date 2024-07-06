@@ -21,5 +21,5 @@ module.exports = function(app) {
   app.patch("/api/event/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.update);
 
   app.delete("/api/event/:id",
-    [authJwt.verifyToken, authJwt.isAdmin], controller.update);
+    [authJwt.verifyToken, authJwt.isAdmin], controller.delete);
 };

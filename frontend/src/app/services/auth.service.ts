@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AUTH_API, httpOptions } from '../constants';
+import { AUTH_API, httpOptions } from '../utils/constants';
 
 
 @Injectable({

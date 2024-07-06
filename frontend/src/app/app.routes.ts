@@ -14,6 +14,7 @@ export const routes: Routes = [
     { path: 'gallery', component: GalleryViewComponent },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
+    { path: 'account', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: '*', redirectTo: 'home' },
 ];

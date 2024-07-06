@@ -39,12 +39,16 @@
         </form>
         } @else {
         <div class="alert alert-success">Logged in as {{ user["username"] }}.</div>
-        @if (this.storageService.isAdmin()) {
-        <a mat-raised-button color="primary" href="admin">Admin</a>
-        }
-        <button mat-raised-button color="secondary" (click)="logout()">Logout</button>
         }
       </div>
     </mat-card-content>
+    @if (isLoggedIn) {
+    <mat-card-footer class="py-4">
+      @if (this.storageService.isAdmin()) {
+      <a mat-raised-button color="primary" href="admin" class="mr-2">Admin</a>
+      }
+      <button mat-raised-button color="secondary" (click)="logout()">Logout</button>
+    </mat-card-footer>
+    }
   </mat-card>
 </div>

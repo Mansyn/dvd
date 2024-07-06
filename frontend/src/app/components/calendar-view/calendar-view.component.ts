@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { format } from 'date-fns';
 import { Event } from '../../models/calendar';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'calendar-view',
@@ -13,17 +14,16 @@ export class CalendarViewComponent {
 
   events: Event[] = [];
   
-  constructor() {
-    this.events = [
-      {
-        id: 1,
-        title: 'Casa Mexico  Grill & Cantina',
-        description: 'SUMMER cocktails to hit the spot.',
-        start: new Date(2024, 5, 30, 12),
-        end: new Date(2024, 5, 30, 22),
-        allDay: true
-      }
-    ];
+  constructor(private eventService: EventService) { }
+
+  ngOnInit(): void {
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    this.eventService.getEvents().subscribe(events => {
+      this.events = events;
+    });
   }
 
   public displayDay(date: Date) {

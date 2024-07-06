@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FooterComponent } from './components/footer/footer.component';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +19,12 @@ import { FooterComponent } from './components/footer/footer.component';
 export class AppComponent implements OnDestroy {
   public links = ['home', 'beers', 'gallery']
   public activeLink = this.links[0]
-  
+  private isLoggedIn = false;
+
   private destroyed = new Subject<void>();
   // private currentScreenSize: string;
 
-  constructor(breakpointObserver: BreakpointObserver) {
+  constructor(breakpointObserver: BreakpointObserver, public storageService: StorageService) {
     breakpointObserver
       .observe([
         Breakpoints.XSmall,
@@ -39,6 +41,16 @@ export class AppComponent implements OnDestroy {
           }
         }
       });
+  }
+
+  ngOnInit(): void {
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.links.push('account')
+      if (this.storageService.isAdmin()) {
+        this.links.push('admin')
+      }
+    }
   }
 
   ngOnDestroy() {

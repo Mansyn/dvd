@@ -16,6 +16,6 @@ export class StringToDatePipe implements PipeTransform {
      * @returns {String} The Date object
      */
     transform(value: string): String {
-        return format(parseISO(value), 'yyyy-MM-dd HH:mm:ss');
+        return format(parseISO(value), 'M/dd/yyyy, h:mm b');
     }
 }

@@ -33,10 +33,9 @@ app.use(
 
 const db = require("./app/models");
 const Role = db.role;
-const uri = "mongodb+srv://pigo:oB0RZgktSx8lKQkA@dvd-brew.78j48c9.mongodb.net/?appName=dvd-brew";
 
 db.mongoose
-  .connect(uri, {
+  .connect(dbConfig.URI, {
     serverApi: {
       version: ServerApiVersion.v1,
       strict: true,

@@ -3,17 +3,30 @@ import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { EventFormComponent } from '../components/event-form/event-form.component';
 import { Event } from '../models/calendar';
 import { AuthService } from '../services/auth.service';
 import { EventService } from '../services/event.service';
 import { StringToDatePipe } from '../utils/string-to-date.pipe';
+import { TruncatePipe } from '../utils/truncate.pipe';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatDividerModule, MatDialogModule, MatTableModule, StringToDatePipe],
+  imports: [
+    CommonModule, 
+    MatCardModule,
+    MatSlideToggleModule,
+    MatDividerModule, 
+    MatDialogModule,
+    MatIconModule,
+    MatTableModule, 
+    StringToDatePipe,
+    TruncatePipe
+  ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
@@ -22,7 +35,7 @@ export class AdminComponent {
 
   readonly dialog = inject(MatDialog);
   events: Event[] = [];
-  displayedColumns: string[] = ['description', 'start', 'end', 'title', 'description', 'allDay'];
+  displayedColumns: string[] = ['title', 'description', 'start', 'end', 'allDay', 'actions'];
 
   ngOnInit(): void {
     this.loadEvents();
@@ -36,7 +49,7 @@ export class AdminComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(EventFormComponent, {
-      width: '500px',
+      width: '50%',
       data: { event: {} }
     });
 
@@ -51,13 +64,15 @@ export class AdminComponent {
 
   editEvent(event: Event): void {
     const dialogRef = this.dialog.open(EventFormComponent, {
-      width: '500px',
+      width: '50%',
       data: { event }
     });
 
     dialogRef.afterClosed().subscribe((result: Event) => {
       if (result) {
-        this.eventService.updateEvent(event.id, result).subscribe(() => {
+        result.start = new Date(result.start)
+        result.end = new Date(result.end!)
+        this.eventService.updateEvent(event._id, result).subscribe(() => {
           this.loadEvents();
         });
       }

@@ -1,39 +1,45 @@
-<h1 mat-dialog-title>{{data.event.id ? 'Edit Event' : 'Add Event'}}</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title>{{data.event._id ? 'Edit Event' : 'Add Event'}}</h1>
+<mat-dialog-content mat-dialog-content>
     <form [formGroup]="eventForm">
-        <mat-form-field>
-            <mat-label>Title</mat-label>
-            <input matInput formControlName="title">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Description</mat-label>
-            <input matInput formControlName="description">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Start Time</mat-label>
-            <input matInput [matDatepicker]="startPicker" formControlName="start">
-            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-            <mat-datepicker #startPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>End Time</mat-label>
-            <input matInput [matDatepicker]="stopPicker" formControlName="end">
-            <mat-datepicker-toggle matSuffix [for]="stopPicker"></mat-datepicker-toggle>
-            <mat-datepicker #stopPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-checkbox formControlName="allDay">All Day</mat-checkbox>
-        <mat-form-field>
-            <mat-label>Action Text</mat-label>
-            <input matInput formControlName="text">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Action Link</mat-label>
-            <input matInput formControlName="link">
-        </mat-form-field>
+        <div>
+            <mat-form-field class="w-full">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="w-full">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="w-1/2 pr-1">
+                <mat-label>Start Time</mat-label>
+                <input type="datetime-local" matInput name="start" formControlName="start">
+            </mat-form-field>
+            <mat-form-field class="w-1/2 pl-1">
+                <mat-label>End Time</mat-label>
+                <input type="datetime-local" matInput name="end" formControlName="end">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-checkbox class="w-full text-center mb-4" formControlName="allDay">All Day</mat-checkbox>
+        </div>
+        <div>
+            <mat-form-field class="w-1/2 pr-1">
+                <mat-label>Action Text</mat-label>
+                <input matInput formControlName="text">
+            </mat-form-field>
+            <mat-form-field class="w-1/2 pl-1">
+                <mat-label>Action Link</mat-label>
+                <input matInput formControlName="link">
+            </mat-form-field>
+        </div>
     </form>
-</div>
-<div mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button [mat-dialog-close]="eventForm.value" [disabled]="!eventForm.valid">{{data.event.id ? 'Update' :
+    <button mat-button [mat-dialog-close]="eventForm.value" [disabled]="!eventForm.valid">{{data.event._id ? 'Update' :
         'Add'}}</button>
-</div>
+</mat-dialog-actions>
