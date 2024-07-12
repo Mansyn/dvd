@@ -16,12 +16,15 @@ const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms)
 })
 export class BeersComponent implements OnInit {
 
-  public loaded: boolean = false
+  public loaded: boolean 
 
     
-  constructor() {}
+  constructor() {
+    this.loaded = false
+  }
  
   ngOnInit() {
+    
     this.loadScript()
   }
 

@@ -1,0 +1,9 @@
+<mat-nav-list>
+    @for (page of pages; track page) {
+    <a [href]="[page.link]" mat-list-item>
+        <mat-icon matListItemIcon [class]="page.isAdmin == true ? 'color-accent' : 'color-primary'">{{page.icon}}</mat-icon>
+        <span matListItemTitle [class]="page.isAdmin == true ? 'color-accent' : 'color-primary'">{{page.text.toUpperCase()}}</span>
+        <span matLine>{{page.description}}</span>
+    </a>
+    }
+</mat-nav-list>
