@@ -22,7 +22,7 @@ export class CalendarViewComponent {
 
   loadEvents(): void {
     this.eventService.getEvents().subscribe(events => {
-      this.events = events;
+      this.events = events.filter( (event) => this.isPreviousDay(event.start, new Date()) );;
     });
   }
 
@@ -41,4 +41,20 @@ export class CalendarViewComponent {
   public displayTime(date: Date) {
     return format(date, "h:mm aaaaa'm'");
   }
+
+  private normalizeDate(date: Date): Date {
+    const normalized = new Date(date);
+    normalized.setHours(0, 0, 0, 0);
+    return normalized;
+}
+
+private isPreviousDay(date1: Date, date2: Date): boolean {
+    const normalizedDate1 = this.normalizeDate(date1);
+    const normalizedDate2 = this.normalizeDate(date2);
+    
+    const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+    
+    return normalizedDate1.getTime() === normalizedDate2.getTime() - oneDayInMilliseconds;
+}
+
 }

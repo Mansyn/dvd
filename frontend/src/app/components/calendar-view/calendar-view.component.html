@@ -5,24 +5,32 @@
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Events</h1>
             </div>
         </div>
+        @if (events.length > 0) {
         @for (event of events; track event) {
         <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3">
             <div class="p-4 flex items-center">
                 <div class="pr-4 bg-accent p-2 rounded-lg text-center">
-                <p class="text-4xl font-bold text-white">{{displayDay(event.start)}}</p>
-                <p class="text-sm text-white">{{displayMonth(event.start)}}, {{displayYear(event.start)}}</p>
+                    <p class="text-4xl font-bold text-white">{{displayDay(event.start)}}</p>
+                    <p class="text-sm text-white">{{displayMonth(event.start)}}, {{displayYear(event.start)}}</p>
                 </div>
                 <div class="ml-4">
-                <div class="uppercase tracking-wide text-sm color-primary font-semibold">
-                    @if (event.allDay) {
+                    <div class="uppercase tracking-wide text-sm color-primary font-semibold">
+                        @if (event.allDay) {
                         All Day
-                    } @else {
+                        } @else {
                         {{displayTime(event.start)}} @if (event.end) { - {{displayTime(event.end)}} }
-                    }
+                        }
+                    </div>
+                    <p class="mt-2 text-gray-500">{{event.title}}</p>
+                    <p class="mt-2 text-gray-500">{{event.description}}</p>
                 </div>
-                <p class="mt-2 text-gray-500">{{event.title}}</p>
-                <p class="mt-2 text-gray-500">{{event.description}}</p>
-                </div>
+            </div>
+        </div>
+        }
+        } @else {
+        <div class="max-w-md mx-auto md:max-w-2xl m-3">
+            <div class="md:flex">
+                <p class="mt-6 text-lg leading-8 text-gray-600">Come back to view see what we have in store.</p>
             </div>
         </div>
         }
