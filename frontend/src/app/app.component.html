@@ -1,31 +1,31 @@
 <div>
-<div class="container mx-auto">
-  <div class="flex justify-center py-4">
-    <img class="max-h-32 md:max-h-52" src="/assets/logos/DVDBrewLogo-small-min.jpg" />
+  <div class="container mx-auto">
+    <div class="flex justify-center py-4">
+      <img class="max-h-32 md:max-h-52" src="/assets/logos/DVDBrewLogo-small-min.jpg" />
+    </div>
   </div>
-</div>
 
-<div>
-  <mat-toolbar>
-    <span class="nav-spacer"></span>
-    @if (!isMobile) {
+  <div>
+    <mat-toolbar>
+      <span class="nav-spacer"></span>
+      @if (!isMobile) {
       @for (page of pages; track page) {
       <a [href]="[page.link]" mat-flat-button class="mr-4" [color]="page.isAdmin == true ? 'accent' : ''">
         <mat-icon>{{page.icon}}</mat-icon> {{page.text.toUpperCase()}}
       </a>
       }
-    } @else {
+      } @else {
       <button (click)="openMobileMenu()" mat-mini-fab>
         <mat-icon>menu</mat-icon>
       </button>
-    }
-    <span class="nav-spacer"></span>
-  </mat-toolbar>
-</div>
+      }
+      <span class="nav-spacer"></span>
+    </mat-toolbar>
+  </div>
 
-<mat-tab-nav-panel #tabPanel>
-  <router-outlet />
-</mat-tab-nav-panel>
+  <mat-tab-nav-panel #tabPanel>
+    <router-outlet />
+  </mat-tab-nav-panel>
 
-<footer></footer>
+  <footer></footer>
 </div>
