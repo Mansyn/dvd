@@ -21,8 +21,8 @@ export class CalendarViewComponent {
   }
 
   loadEvents(): void {
-    this.eventService.getEvents().subscribe(events => {
-      this.events = events.filter( (event) => this.isPreviousDay(event.start, new Date()) );;
+    this.eventService.getEvents().subscribe(_events => {
+      this.events = _events.filter( (target) => this.hasPassed(target.start, new Date()) );;
     });
   }
 
@@ -48,13 +48,12 @@ export class CalendarViewComponent {
     return normalized;
 }
 
-private isPreviousDay(date1: Date, date2: Date): boolean {
+private hasPassed(date1: Date, date2: Date): boolean {
     const normalizedDate1 = this.normalizeDate(date1);
     const normalizedDate2 = this.normalizeDate(date2);
     
-    const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
     
-    return normalizedDate1.getTime() === normalizedDate2.getTime() - oneDayInMilliseconds;
+    return normalizedDate1 > normalizedDate2
 }
 
 }
