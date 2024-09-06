@@ -8,14 +8,16 @@ const { ServerApiVersion } = require('mongodb');
 
 const app = express();
 
-app.use(cors());
-/* for Angular Client (withCredentials) */
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: ["http://localhost:8081"],
-//   })
-// );
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ["https://dvdbrew.com"] // Production environment
+  : ["http://localhost:4200", "http://localhost:8081"];
+
+app.use(
+  cors({
+    credentials: true,
+    origin: allowedOrigins,
+  })
+);
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -26,8 +28,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     name: "bezkoder-session",
-    keys: ["COOKIE_SECRET"], // should use as secret environment variable
-    httpOnly: true
+    keys: [process.env.COOKIE_SECRET || "default-secret"],
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // Only use secure cookies in production
+    sameSite: "lax", // Allows cookies to be sent with cross-origin requests
   })
 );
 

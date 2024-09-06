@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Event } from '../models/calendar';
-import { httpOptions } from '../utils/constants';
+import { httpOptions, httpOptionsCredentials } from '../utils/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -24,16 +24,17 @@ export class EventService {
 
   createEvent(event: Event): Observable<Event> {
     return this.http.post<Event>(`${environment.API}event`, event,
-      httpOptions);
+      httpOptionsCredentials);
   }
 
   updateEvent(id: number, event: Event): Observable<Event> {
     return this.http.patch<Event>(`${environment.API}event/${id}`, event,
-      httpOptions);
+      httpOptionsCredentials);
   }
 
   deleteEvent(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.API}event/${id}`,
-      httpOptions);
+      httpOptionsCredentials
+    );
   }
 }
