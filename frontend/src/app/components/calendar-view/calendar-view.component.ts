@@ -22,7 +22,7 @@ export class CalendarViewComponent {
 
   loadEvents(): void {
     this.eventService.getEvents().subscribe(_events => {
-      this.events = _events.filter( (target) => this.hasPassed(target.start, new Date()) );;
+      this.events = _events //.filter( (target) => this.hasPassed(target.start, new Date()) );;
     });
   }
 
