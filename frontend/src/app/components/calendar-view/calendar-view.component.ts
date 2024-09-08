@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { format } from 'date-fns';
+import { format, isAfter, parseISO } from 'date-fns';
 import { Event } from '../../models/calendar';
 import { EventService } from '../../services/event.service';
 
@@ -21,8 +21,9 @@ export class CalendarViewComponent {
   }
 
   loadEvents(): void {
+    const now = new Date();
     this.eventService.getEvents().subscribe(_events => {
-      this.events = _events //.filter( (target) => this.hasPassed(target.start, new Date()) );;
+      this.events = _events.filter( (target) => this.hasPassed(target, now) );;
     });
   }
 
@@ -42,18 +43,17 @@ export class CalendarViewComponent {
     return format(date, "h:mm aaaaa'm'");
   }
 
-  private normalizeDate(date: Date): Date {
-    const normalized = new Date(date);
-    normalized.setHours(0, 0, 0, 0);
-    return normalized;
-}
-
-private hasPassed(date1: Date, date2: Date): boolean {
-    const normalizedDate1 = this.normalizeDate(date1);
-    const normalizedDate2 = this.normalizeDate(date2);
+  private hasPassed(_event: Event, _now: Date): boolean {
+    const startDate = parseISO(_event.start.toString());  // Parse start date
+    const endDate = _event.end ? parseISO(_event.end.toString()) : null;  // Parse end date if it exists
     
-    
-    return normalizedDate1 > normalizedDate2
-}
+    if (_event.allDay) {
+      // For all-day events, check if the start date is after the current date
+      return isAfter(startDate, _now);
+    } else {
+      // For other events, check if the end date is after the current date
+      return endDate ? isAfter(endDate, _now) : true;
+    }
+  }
 
 }
