@@ -23,7 +23,7 @@ export class CalendarViewComponent {
   loadEvents(): void {
     const now = new Date();
     this.eventService.getEvents().subscribe(_events => {
-      this.events = _events.sort((a, b) => b.start.getTime() - a.start.getTime()).filter( (target) => this.hasPassed(target, now) );;
+      this.events = _events.sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime()).filter( (target) => this.hasPassed(target, now) );;
     });
   }
 
