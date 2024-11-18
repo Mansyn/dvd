@@ -1,6 +1,6 @@
 <div id="calendar" class="container mx-auto">
   <div class="mx-auto py-8 sm:py-16">
-      <div class="max-w-md mx-auto md:max-w-2xl m-3">
+      <div class="max-w-md mx-auto md:max-w-2xl m-4">
           <div class="md:flex">
               <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Events</h1>
           </div>
@@ -19,7 +19,7 @@
                   <div class="mb-4">
                     <p class="font-bold text-black text-2xl">{{event.title}}</p>
                     <p class="text-lg text-black opacity-80">All Day</p>
-                    <p class="text-lg text-black opacity-80">{{event.description}}</p>
+                    <p class="font-bold text-lg text-black opacity-80">{{event.description}}</p>
                   </div>
                 }
                 <!-- Timed events -->
@@ -29,7 +29,7 @@
                     <p class="text-lg text-black opacity-80">{{displayTime(event.start)}}
                       @if (event.end) { - {{displayTime(event.end)}} }
                     </p>
-                    <p class="text-lg text-black opacity-80">{{event.description}}</p>
+                    <p class="font-bold text-lg text-black opacity-80">{{event.description}}</p>
                   </div>
                 }
               </div>

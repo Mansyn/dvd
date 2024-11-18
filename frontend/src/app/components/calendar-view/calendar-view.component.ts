@@ -49,7 +49,7 @@ export class CalendarViewComponent {
   private groupAndFilterEvents() {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const twoWeeksFromNow = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000); // Two weeks from today
+    const twoWeeksFromNow = new Date(today.getTime() + 10 * 24 * 60 * 60 * 1000);
     // this.events.push(this.newEvent);
 
     const grouped = this.events
