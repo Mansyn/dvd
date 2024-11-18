@@ -16,14 +16,14 @@ export class CalendarViewComponent {
   events: Event[] = [];
   groupedEvents: GroupedEvents[] = [];
   
-  newEvent: Event = {
-    _id: 0,
-    start: new Date("2024-11-19T19:25"),
-    end: new Date("2024-11-19T21:25"),
-    title: 'test',
-    description: 'test',
-    allDay: false
-  };
+  // newEvent: Event = {
+  //   _id: 0,
+  //   start: new Date("2024-11-19T19:25"),
+  //   end: new Date("2024-11-19T21:25"),
+  //   title: 'test',
+  //   description: 'test',
+  //   allDay: false
+  // };
   
   constructor(private eventService: EventService) { }
 
@@ -50,7 +50,7 @@ export class CalendarViewComponent {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const twoWeeksFromNow = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000); // Two weeks from today
-    this.events.push(this.newEvent);
+    // this.events.push(this.newEvent);
 
     const grouped = this.events
       .filter(event => {
