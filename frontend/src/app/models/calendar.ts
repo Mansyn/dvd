@@ -9,3 +9,9 @@ export interface Event {
     link?: string;
     cssClass?: string;
 }
+
+export interface GroupedEvents {
+    date: Date;
+    allDayEvents: Event[];
+    timedEvents: Event[];
+  }
