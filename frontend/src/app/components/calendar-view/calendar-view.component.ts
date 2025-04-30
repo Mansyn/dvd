@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { format, isAfter, parseISO } from 'date-fns';
+import { addDays, format, isAfter, isBefore } from 'date-fns';
 import { Event, GroupedEvents } from '../../models/calendar';
 import { EventService } from '../../services/event.service';
 
@@ -41,7 +41,7 @@ export class CalendarViewComponent {
           end: event.end ? new Date(event.end) : undefined
         }))
         .sort((a, b) => a.start.getTime() - b.start.getTime())
-        .filter(target => this.hasPassed(target, now));
+        .filter(event => !this.hasPassed(event, now));
       this.groupAndFilterEvents();
     });
   }
@@ -49,13 +49,12 @@ export class CalendarViewComponent {
   private groupAndFilterEvents() {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const twoWeeksFromNow = new Date(today.getTime() + 10 * 24 * 60 * 60 * 1000);
-    // this.events.push(this.newEvent);
+    const twoWeeksFromNow = addDays(today, 14);
 
     const grouped = this.events
       .filter(event => {
-        const eventDate = new Date(event.start);
-        return eventDate >= today && eventDate <= twoWeeksFromNow;
+        const eventStart = event.start;
+        return !isBefore(eventStart, today) && !isAfter(eventStart, twoWeeksFromNow);
       })
       .reduce((acc, event) => {
         const date = new Date(event.start.getFullYear(), event.start.getMonth(), event.start.getDate());
@@ -90,17 +89,13 @@ export class CalendarViewComponent {
     return format(date, "h:mm aaaaa'm'");
   }
 
-  private hasPassed(_event: Event, _now: Date): boolean {
-    const startDate = _event.start.toString();  // Parse start date
-    const endDate = _event.end ? parseISO(_event.end.toString()) : null;  // Parse end date if it exists
-    
-    if (_event.allDay) {
-      // For all-day events, check if the start date is after the current date
-      return isAfter(startDate, _now);
-    } else {
-      // For other events, check if the end date is after the current date
-      return endDate ? isAfter(endDate, _now) : true;
+  private hasPassed(event: Event, now: Date): boolean {
+    // For events with an end time, check if the end time has passed
+    if (event.end) {
+      return isBefore(event.end, now);
     }
+    // For events with only a start time, check if the start time has passed
+    return isBefore(event.start, now);
   }
 
 }
