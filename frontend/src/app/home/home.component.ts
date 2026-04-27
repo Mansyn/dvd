@@ -32,7 +32,7 @@ export class HomeComponent {
   public todayIndex: number = (new Date().getDay() + 6) % 7; // Monday=0 ... Sunday=6
 
   public hours: { day: string; hours?: string; closed?: boolean }[] = [
-    { day: 'Monday', hours: '4:00 PM – 10:00 PM' },
+    { day: 'Monday', closed: true },
     { day: 'Tuesday', hours: '4:00 PM – 10:00 PM' },
     { day: 'Wednesday', hours: '4:00 PM – 10:00 PM' },
     { day: 'Thursday', hours: '4:00 PM – 10:00 PM' },
