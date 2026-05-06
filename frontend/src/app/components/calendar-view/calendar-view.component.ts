@@ -49,12 +49,12 @@ export class CalendarViewComponent {
   private groupAndFilterEvents() {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const twoWeeksFromNow = addDays(today, 14);
+    const oneMonthFromNow = addDays(today, 30);
 
     const grouped = this.events
       .filter(event => {
         const eventStart = event.start;
-        return !isBefore(eventStart, today) && !isAfter(eventStart, twoWeeksFromNow);
+        return !isBefore(eventStart, today) && !isAfter(eventStart, oneMonthFromNow);
       })
       .reduce((acc, event) => {
         const date = new Date(event.start.getFullYear(), event.start.getMonth(), event.start.getDate());
